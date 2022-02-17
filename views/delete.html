@@ -1,0 +1,16 @@
+<%- include('__layout/header.html') -%>
+
+<div class="card m-4 w-30">
+<img
+    class="card-img-top"
+    src="<%= rental.image %>"
+    alt="<%= rental.name %>"
+/>
+<div class="card-body">
+    <p class="card-text">Do you really want to delete Rental "<%= rental.name %>"?</p>
+    <a href="/" role="button" class="btn btn-dark m-2">Cancel</button>
+    <a href="/delete/<%= rental.id %>/confirm" role="button" class="btn btn-danger m-2">Yes, Delete it</a>
+</div>
+</div>
+  
+<%- include('__layout/footer.html') -%>

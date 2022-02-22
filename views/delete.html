@@ -8,8 +8,10 @@
 />
 <div class="card-body">
     <p class="card-text">Do you really want to delete Rental "<%= rental.name %>"?</p>
-    <a href="/" role="button" class="btn btn-dark m-2">Cancel</button>
-    <a href="/delete/<%= rental.id %>/confirm" role="button" class="btn btn-danger m-2">Yes, Delete it</a>
+    <form action="/api/rental/<%= rental.id %>?_method=DELETE" method="post" encType="multipart/form-data">
+        <a href="/" role="button" class="btn">Cancel</a>
+        <button role="button" type="submit" class="btn btb-inline btn-danger m-2">Yes, Delete it</button>
+    </form>
 </div>
 </div>
   

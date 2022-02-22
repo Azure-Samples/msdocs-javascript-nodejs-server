@@ -2,7 +2,7 @@
 
 <h3>Create a new rental</h3>
 
-<form class="card p-3 m-3 w-50" action="/new/confirm" method="post">
+<form class="card p-3 m-3 w-50" action="/api/rental" method="post" encType="multipart/form-data">
   <div class="form-group">
     <label for="name">Rental name</label>
     <input
@@ -12,14 +12,35 @@
       class="form-control"
       id="name"
       name="name"
-      aria-describedby="emailHelp"
       placeholder="Enter rental name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Rental description</label>
+    <input
+      type="text"
+      required
+      autocomplete="off"
+      class="form-control"
+      id="description"
+      name="description"
+      placeholder="Enter rental description"
+    />
+  </div>
+  <div class="form-group">
+    <label for="Image">Image</label>
+    <input
+      type="file"
+      autocomplete="off"
+      class="form-control"
+      id="image"
+      name="image"
+      placeholder="Select image of rental"
     />
   </div>
 
   <div class="form-group">
     <label for="price">Price</label>
-
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">$</span>
@@ -33,6 +54,70 @@
         placeholder="Enter rental price"
       />
     </div>
+  </div>
+
+  <div class="form-group">
+    <label for="bedrooms">Number of bedrooms</label>
+    <div class="input-group">
+      <select
+        required
+        type="number"
+        class="form-control"
+        id="bedrooms"
+        name="bedrooms"
+      >
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="bathrooms">Number of bathrooms</label>
+    <div class="input-group">
+      <select
+        required
+        class="form-control"
+        id="bathrooms"
+        name="bathrooms"
+      >
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <div class="input-group">
+      <select
+        required
+        class="form-control"
+        id="city"
+        name="city"
+      >
+      <option value="New York">New York</option>
+      <option value="Paris">Paris</option>
+      <option value="Barcelona">Barcelona</option>
+      <option value="Tokyo">Tokyo</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="link">Link to more information</label>
+    <div class="input-group">
+      <input
+        required
+        type="text"
+        class="form-control"
+        id="link"
+        name="link"
+        placeholder="URL to more information"
+      />      
+    </div>
+  </div>
   </div>
 
   <div class="form-group">

@@ -4,7 +4,7 @@ import {
   deleteRentalById,
   addRental,
   updateRental,
-} from '../services/database.js';
+} from '../model/rental.model.js';
 import { deleteBlob, uploadBlob } from '../services/blobstorage.js';
 
 // List view

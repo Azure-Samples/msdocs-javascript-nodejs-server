@@ -1,14 +1,14 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
 // MongoDB connection string
-const mongodbConnectionUrl = process.env.AZURE_COSMOSDB_CONNECTIONSTRING;
+const mongodbConnectionUrl = process.env.MONGODB_URI;
 
 // MongoDB database name
-const mongodbDatabaseName = process.env.AZURE_COSMOSDB_MONGODB_DATABASE_NAME;
+const mongodbDatabaseName = process.env.MONGODB_URI_DATABASE_NAME;
 
 // MongoDB collection name
 const mongodbCollectionName =
-  process.env.AZURE_COSMOSDB_MONGODB_COLLECTION_NAME;
+  process.env.MONGODB_URI_COLLECTION_NAME;
 
 // Required params for module
 if (!mongodbConnectionUrl && !mongodbDatabaseName && !mongodbCollectionName) {

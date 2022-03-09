@@ -16,7 +16,7 @@ import {
   apiDeleteRental,
   apiEditRental,
 } from '../controller/rentals.controller.js';
-import { connectToDatabase } from '../model/rental.model.js';
+import { connectToDatabase } from '../2-Deploy-basic-app-to-azure/model/rental.model.js';
 import { connectToBlobStorage } from '../services/blobstorage.js';
 
 const inMemoryStorage = multer.memoryStorage();

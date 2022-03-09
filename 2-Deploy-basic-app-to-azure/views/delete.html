@@ -1,0 +1,18 @@
+<%- include('__layout/header.html') -%>
+
+<div class="card m-4 w-30">
+<img
+    class="card-img-top"
+    src="<%= rental.image %>"
+    alt="<%= rental.name %>"
+/>
+<div class="card-body">
+    <p class="card-text">Do you really want to delete Rental "<%= rental.name %>"?</p>
+    <form action="/api/rental/<%= rental.id %>?_method=DELETE" method="post" encType="multipart/form-data">
+        <a href="/" role="button" class="btn">Cancel</a>
+        <button role="button" type="submit" class="btn btb-inline btn-danger m-2">Yes, Delete it</button>
+    </form>
+</div>
+</div>
+  
+<%- include('__layout/footer.html') -%>

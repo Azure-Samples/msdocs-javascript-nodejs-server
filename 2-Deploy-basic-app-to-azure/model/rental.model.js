@@ -1,85 +1,50 @@
-import { MongoClient, ObjectId } from 'mongodb';
+import { readFile } from "fs/promises";
 
-// MongoDB connection string
-const mongodbConnectionUrl = process.env.MONGODB_URI;
+let RENTALS;
 
-// MongoDB database name
-const mongodbDatabaseName = process.env.MONGODB_URI_DATABASE_NAME;
-
-// MongoDB collection name
-const mongodbCollectionName =
-  process.env.MONGODB_URI_COLLECTION_NAME;
-
-// Required params for module
-if (!mongodbConnectionUrl && !mongodbDatabaseName && !mongodbCollectionName) {
-  throw Error('Azure Cosmos DB required information is missing');
+// Read data in when app starts
+// Database is kept in memory only
+export const connectToDatabase = async () =>{
+  RENTALS = JSON.parse(
+  await readFile(new URL("../data/fake-rentals.json", import.meta.url)));
 }
 
-let client;
-let database;
-let rentalsCollection;
+export const getRentals = () => RENTALS.sort((a, b) => b.id - a.id);
 
-const toJson = (data) => {
-  // convert _id to id and clean up
-  const idWithoutUnderscore = data._id.toString();
-  delete data._id;
+export const getRentalById = (id) =>
+  RENTALS.find((rental) => rental.id === Number(id));
 
-  return {
-    id: idWithoutUnderscore,
-    ...data,
-  };
-};
-
-// Get all rentals from database
-// Transform `_id` to `id`
-export const getRentals = async () => {
-  const rentals = await rentalsCollection.find({}).toArray();
-  if (!rentals) return [];
-
-  const alteredRentals = rentals.map((rental) => toJson(rental));
-  return alteredRentals;
-};
-// Get one rental by id
-export const getRentalById = async (id) => {
-  if (!id) return null;
-
-  const rental = await rentalsCollection.findOne({ _id: new ObjectId(id) });
-  return toJson(rental);
-};
-// Delete one rental by id
-export const deleteRentalById = async (id) => {
-  if (!id) return null;
-
-  return await rentalsCollection.deleteOne({ _id: ObjectId(id) });
-};
-// Add one rental
-export const addRental = async (rental) => {
-  return await rentalsCollection.insertOne(rental);
-};
-// Update one rental
-// Only handles database, image changes are handled in controller
-export const updateRental = async (id, rental) => {
-  return await rentalsCollection.updateOne({ _id: id }, { $set: rental });
-};
-// Create database connection
-export const connectToDatabase = async () => {
-  if (!client || !database || !rentalsCollection) {
-    // connect
-    client = await MongoClient.connect(mongodbConnectionUrl, {
-      useUnifiedTopology: true,
-    });
-
-    // get database
-    database = client.db(mongodbDatabaseName);
-
-    // create collection if it doesn't exist
-    const collections = await database.listCollections().toArray();
-    const collectionExists = collections.filter((collection) => collection.name === mongodbCollectionName);
-    if (!collectionExists) {
-      await database.createCollection(mongodbCollectionName);
-    }
-
-    // get collection
-    rentalsCollection = await database.collection(mongodbCollectionName);
+export const deleteRentalById = (id) => {
+  const index = RENTALS.findIndex((rental) => rental.id === Number(id));
+  if (index !== -1) {
+    RENTALS.splice(index, 1);
   }
+  console.log(getRentals());
+};
+
+const getMaxId = () =>{
+  const maxIdObject = RENTALS.reduce(function(prev, current) {
+    return (prev.id > current.id) ? prev : current
+  });
+
+  return maxIdObject.id;
+}
+
+export const addRental = (rental) => {
+  RENTALS.push({
+    id: getMaxId() + 1,
+    ...rental,
+  });
+  console.log(getRentals());
+}
+
+export const updateRental = (rental) => {
+  const index = RENTALS.findIndex((r) => r.id === Number(rental.id));
+  if (index !== -1) {
+    RENTALS[index] = {
+      ...RENTALS[index],
+      ...rental,
+    };
+  }
+  console.log(getRentals());
 };

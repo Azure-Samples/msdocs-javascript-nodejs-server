@@ -1,0 +1,15 @@
+# Ignore artifacts:
+.devcontainer
+.github/
+.vscode/**
+build
+coverage
+views
+node_modules
+./packagelock-json
+LICENSE.md
+CONTRIBUTING.md
+CHANGELOG.md
+readme.md
+.env
+**/*.yml

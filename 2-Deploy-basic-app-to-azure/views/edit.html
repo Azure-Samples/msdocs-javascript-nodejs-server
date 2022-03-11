@@ -29,18 +29,6 @@
       placeholder="Enter rental description"
       value="<%= rental.description %>"
     />
-  </div>
-  <img class="card-img-top" src="<%= rental.image %>" alt="<%= rental.name %>" />  
-  <div class="form-group">
-    <label for="Image">Image</label>
-    <input
-      type="file"
-      autocomplete="off"
-      class="form-control"
-      id="image"
-      name="image"
-      placeholder="Select image of rental"
-    />
   </div>  
   <div class="form-group">
     <label for="price">Price</label>
@@ -96,18 +84,18 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="city">City</label>
+    <label for="location">location</label>
     <div class="input-group">
       <select
         required
         class="form-control"
-        id="city"
-        name="city"
+        id="location"
+        name="location"
       >
-      <option value="New York" <%= (rental.city==='New York') ? 'selected' : '' %> >New York</option>
-      <option value="Paris" <%= (rental.city==='Paris') ? 'selected' : '' %> >Paris</option>
-      <option value="Barcelona" <%= (rental.city==='Barcelona') ? 'selected' : '' %> >Barcelona</option>
-      <option value="Tokyo" <%= (rental.city==='Tokyo') ? 'selected' : '' %> >Tokyo</option>
+      <option value="New York" <%= (rental.location==='New York') ? 'selected' : '' %> >New York</option>
+      <option value="Paris" <%= (rental.location==='Paris') ? 'selected' : '' %> >Paris</option>
+      <option value="Barcelona" <%= (rental.location==='Barcelona') ? 'selected' : '' %> >Barcelona</option>
+      <option value="Tokyo" <%= (rental.location==='Tokyo') ? 'selected' : '' %> >Tokyo</option>
       </select>
     </div>
   </div>

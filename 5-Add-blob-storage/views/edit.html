@@ -30,7 +30,9 @@
       value="<%= rental.description %>"
     />
   </div>
+  <% if (rental.image) { %>
   <img class="card-img-top" src="<%= rental.image %>" alt="<%= rental.name %>" />  
+  <% } %>
   <div class="form-group">
     <label for="Image">Image</label>
     <input

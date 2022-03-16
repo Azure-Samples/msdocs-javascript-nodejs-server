@@ -77,6 +77,18 @@ export const deleteBlob = async (url) => {
   const parts = url.split('/');
   const fileName = parts[parts.length - 1];
 
-  // delete image
-  await azureContainerClient.deleteBlob(fileName);
+  if(!fileName) return;
+
+  // create blob client
+  const blobFile = new BlockBlobClient(
+    azureStorageConnectionUrl,
+    azureContainerName,
+    fileName,
+  );
+
+  if(blobFile && blobFile.url){
+    // delete image
+    await azureContainerClient.deleteBlob(fileName);
+  }
+
 };

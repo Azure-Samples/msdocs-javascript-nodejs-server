@@ -1,3 +1,4 @@
+import createError from 'http-errors';
 import {
   getRentals,
   getRentalById,
@@ -24,21 +25,21 @@ export const apiAllRentals = async (req, res) => {
 // Delete view
 export const viewDeleteRental = async (req, res) => {
   const { id } = req.params;
-  const rental = await getRentalById(id);
 
-  if (!rental) {
-    res.status(404).send('Rental not found');
-  } else {
-    res.render('delete', {
-      rental,
-    });
-  }
+  const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
+
+  res.render('delete', {
+    rental,
+  });
 };
 // Delete API
 export const apiDeleteRental = async (req, res) => {
   const { id } = req.params;
 
   const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
+
   await deleteBlob(rental.image);
   await deleteRentalById(id);
   res.redirect('/');
@@ -73,7 +74,10 @@ export const apiAddNewRental = async (req, res) => {
 // Edit view
 export const viewEditRental = async (req, res) => {
   const { id } = req.params;
+
   const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
+
   res.render('edit', {
     rental,
   });
@@ -84,12 +88,11 @@ export const apiEditRental = async (req, res) => {
     name, description, price, location, bedrooms, bathrooms, link,
   } = req.body;
   const { id } = req.params;
-  const rental = await getRentalById(id);
-  let imageBlob = null;
 
-  if (!rental) {
-    res.status(404).send('Rental not found');
-  } else {
+  const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
+
+  let imageBlob = null;
 
     if (req.file) {
       await deleteBlob(rental.image);
@@ -111,5 +114,5 @@ export const apiEditRental = async (req, res) => {
 
     await updateRental(updatedRental);
     res.redirect('/');
-  }
+
 };

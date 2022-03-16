@@ -5,6 +5,7 @@ import {
   addRental,
   updateRental,
 } from '../model/rental.model.js';
+import createError from 'http-errors';
 
 // List view
 export const viewAllRentals = async (req, res) => {
@@ -22,21 +23,22 @@ export const apiAllRentals = async (req, res) => {
 // Delete view
 export const viewDeleteRental = async (req, res) => {
   const { id } = req.params;
-  const rental = await getRentalById(id);
 
-  if (!rental) {
-    res.status(404).send('Rental not found');
-  } else {
-    res.render('delete', {
-      rental,
-    });
-  }
+  const rental = await getRentalById(id);
+  if (!rental) return next(createError(400, 'Rental not found'));
+
+  res.render('delete', {
+    rental,
+  });
+
 };
 // Delete API
 export const apiDeleteRental = async (req, res) => {
   const { id } = req.params;
 
   const rental = await getRentalById(id);
+  if (!rental) return next(createError(400, 'Rental not found'));
+
   await deleteRentalById(id);
   res.redirect('/');
 };
@@ -66,6 +68,8 @@ export const apiAddNewRental = async (req, res) => {
 export const viewEditRental = async (req, res) => {
   const { id } = req.params;
   const rental = await getRentalById(id);
+  if (!rental) return next(createError(400, 'Rental not found'));
+
   res.render('edit', {
     rental,
   });
@@ -76,25 +80,23 @@ export const apiEditRental = async (req, res) => {
     name, description, price, location, bedrooms, bathrooms, link,
   } = req.body;
   const { id } = req.params;
+  
   const rental = await getRentalById(id);
+  if (!rental) return next(createError(400, 'Rental not found'));
 
-  if (!rental) {
-    res.status(404).send('Rental not found');
-  } else {
-
-    // don't update image - this will be fixed in Storage module of Learn path
-    const updatedRental = {
-      ...rental,
-      name,
-      description,
-      price,
-      location,
-      bedrooms,
-      bathrooms,
-      link,
-    }
-
-    await updateRental(updatedRental);
-    res.redirect('/');
+  // don't update image - this will be fixed in Storage module of Learn path
+  const updatedRental = {
+    ...rental,
+    name,
+    description,
+    price,
+    location,
+    bedrooms,
+    bathrooms,
+    link,
   }
+
+  await updateRental(updatedRental);
+  res.redirect('/');
+
 };

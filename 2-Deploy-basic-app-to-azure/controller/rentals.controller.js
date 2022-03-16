@@ -18,11 +18,12 @@ export const viewAllRentals = async (req, res) => {
 // List API
 export const apiAllRentals = async (req, res) => {
   const rentals = await getRentals();
-  res.json(res, next, rentals);
+  res.json(rentals);
 };
 // Delete view
 export const viewDeleteRental = async (req, res, next) => {
   const { id } = req.params;
+  
   const rental = await getRentalById(id);
   if(!rental) return next(createError(400, 'Rental not found'));
 

@@ -1,0 +1,62 @@
+[
+    {
+      "name": "Georgian Court",
+      "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
+      "image": "https://picsum.photos/200",
+      "price": "1000000",
+      "location": "San Francisco, CA",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "link": "http://www.example.com"
+    },
+    {
+      "name": "Brittany Court",
+      "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
+      "image": "https://picsum.photos/200",
+      "price": "3000000",
+      "location": "San Francisco, CA",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "link": "http://www.example.com"
+    },
+    {
+      "name": "Baz Homes",
+      "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
+      "image": "https://picsum.photos/200",
+      "price": "9000000",
+      "location": "San Francisco, CA",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "link": "http://www.example.com"
+    },
+    {
+      "name": "Bar Homes",
+      "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
+      "image": "https://picsum.photos/200",
+      "price": "4000000",
+      "location": "San Francisco, CA",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "link": "http://www.example.com"
+    },
+    {
+      "name": "Foo Homes",
+      "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
+      "image": "https://picsum.photos/200",
+      "price": "100000",
+      "location": "San Francisco, CA",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "link": "http://www.example.com"
+    },
+    {
+      "name": "Foo Hall",
+      "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
+      "image": "https://picsum.photos/200",
+      "price": "600000",
+      "location": "San Francisco, CA",
+      "bedrooms": "1",
+      "bathrooms": "2",
+      "link": "http://www.example.com"
+    }
+  ]

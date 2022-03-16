@@ -1,6 +1,5 @@
 [
     {
-      "id": 1,
       "name": "Georgian Court",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
       "image": "https://picsum.photos/200",
@@ -11,7 +10,6 @@
       "link": "http://www.example.com"
     },
     {
-      "id": 2,
       "name": "Brittany Court",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
       "image": "https://picsum.photos/200",
@@ -22,7 +20,6 @@
       "link": "http://www.example.com"
     },
     {
-      "id": 3,
       "name": "Baz Homes",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
       "image": "https://picsum.photos/200",
@@ -33,7 +30,6 @@
       "link": "http://www.example.com"
     },
     {
-      "id": 4,
       "name": "Bar Homes",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
       "image": "https://picsum.photos/200",
@@ -44,7 +40,6 @@
       "link": "http://www.example.com"
     },
     {
-      "id": 5,
       "name": "Foo Homes",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
       "image": "https://picsum.photos/200",
@@ -55,7 +50,6 @@
       "link": "http://www.example.com"
     },
     {
-      "id": 6,
       "name": "Foo Hall",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
       "image": "https://picsum.photos/200",

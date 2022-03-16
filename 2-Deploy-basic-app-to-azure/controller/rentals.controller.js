@@ -5,6 +5,7 @@ import {
   addRental,
   updateRental,
 } from '../model/rental.model.js';
+import createError from 'http-errors';
 
 // List view
 export const viewAllRentals = async (req, res) => {
@@ -17,26 +18,25 @@ export const viewAllRentals = async (req, res) => {
 // List API
 export const apiAllRentals = async (req, res) => {
   const rentals = await getRentals();
-  res.json(rentals);
+  res.json(res, next, rentals);
 };
 // Delete view
-export const viewDeleteRental = async (req, res) => {
+export const viewDeleteRental = async (req, res, next) => {
   const { id } = req.params;
   const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
 
-  if (!rental) {
-    res.status(404).send('Rental not found');
-  } else {
-    res.render('delete', {
-      rental,
-    });
-  }
+  res.render('delete', {
+    rental,
+  });
 };
 // Delete API
-export const apiDeleteRental = async (req, res) => {
+export const apiDeleteRental = async (req, res, next) => {
   const { id } = req.params;
 
   const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
+
   await deleteRentalById(id);
   res.redirect('/');
 };
@@ -63,38 +63,36 @@ export const apiAddNewRental = async (req, res) => {
   res.redirect('/');
 };
 // Edit view
-export const viewEditRental = async (req, res) => {
+export const viewEditRental = async (req, res, next) => {
   const { id } = req.params;
   const rental = await getRentalById(id);
+  if(!rental) return next(createError(400, 'Rental not found'));
+
   res.render('edit', {
     rental,
   });
 };
 // Edit API
-export const apiEditRental = async (req, res) => {
+export const apiEditRental = async (req, res, next) => {
   const {
     name, description, price, location, bedrooms, bathrooms, link,
   } = req.body;
   const { id } = req.params;
   const rental = await getRentalById(id);
-
-  if (!rental) {
-    res.status(404).send('Rental not found');
-  } else {
-
-    // don't update image - this will be fixed in Storage module of Learn path
-    const updatedRental = {
-      ...rental,
-      name,
-      description,
-      price,
-      location,
-      bedrooms,
-      bathrooms,
-      link,
-    }
-
-    await updateRental(updatedRental);
-    res.redirect('/');
+  if(!rental) return next(createError(400, 'Rental not found'));
+  
+  // don't update image - this will be fixed in Storage module of Learn path
+  const updatedRental = {
+    ...rental,
+    name,
+    description,
+    price,
+    location,
+    bedrooms,
+    bathrooms,
+    link,
   }
+
+  await updateRental(updatedRental);
+  res.redirect('/');
 };

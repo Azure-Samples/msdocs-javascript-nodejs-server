@@ -34,7 +34,7 @@ const onRouteErrors = (err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', err);
 };
 const checkTrailingSlash = (req, res, next) => {
   const trailingSlashUrl = req.baseUrl + req.url;

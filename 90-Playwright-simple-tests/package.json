@@ -1,0 +1,16 @@
+{
+  "name": "90-playwright-simple-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.20.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0"
+  }
+}

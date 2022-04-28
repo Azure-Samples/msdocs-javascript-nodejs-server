@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "cross-env-shell DEBUG=express:* node index.js",
+    "import-data": "node ./scripts/import-data.js",
     "format": "prettier --write ."
   },
   "dependencies": {

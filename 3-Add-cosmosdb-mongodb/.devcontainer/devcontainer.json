@@ -13,6 +13,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
+		"ms-azuretools.vscode-cosmosdb",
+		"ms-azuretools.vscode-azureappservice"
 		"mongodb.mongodb-vscode" 
 	],
 

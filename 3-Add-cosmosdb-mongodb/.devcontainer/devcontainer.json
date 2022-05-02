@@ -14,7 +14,7 @@
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"ms-azuretools.vscode-cosmosdb",
-		"ms-azuretools.vscode-azureappservice"
+		"ms-azuretools.vscode-azureappservice",
 		"mongodb.mongodb-vscode" 
 	],
 

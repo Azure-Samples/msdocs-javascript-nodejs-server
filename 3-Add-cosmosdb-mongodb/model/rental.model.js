@@ -4,10 +4,6 @@ const mongodbConnectionUrl = process.env.MONGODB_URI_CONNECTION_STRING;
 const mongodbDatabaseName = process.env.MONGODB_URI_DATABASE_NAME;
 const mongodbCollectionName = process.env.MONGODB_URI_COLLECTION_NAME;
 
-if(!mongodbConnectionUrl
-  || !mongodbDatabaseName
-  || !mongodbCollectionName) throw new Error("Missing MongoDB connection information");
-
 let client;
 let database;
 let rentalsCollection;
@@ -53,28 +49,62 @@ export const addRental = async (rental) => {
 // Update one rental
 // Only handles database, image changes are handled in controller
 export const updateRental = async (rental) => {
-  return await rentalsCollection.updateOne({ _id: rental.id }, { $set: rental });
+  console.log(rental);
+  const response = await rentalsCollection.updateOne({ _id:  new ObjectId(rental.id) }, { $set: rental });
+  console.log(response);
+  return response;
 };
 // Create database connection
 export const connectToDatabase = async () => {
 
-  if (!client || !database || !rentalsCollection) {
-    // connect
-    client = await MongoClient.connect(mongodbConnectionUrl, {
-      useUnifiedTopology: true,
-    });
+  try{
 
-    // get database
-    database = client.db(mongodbDatabaseName);
-
-    // create collection if it doesn't exist
-    const collections = await database.listCollections().toArray();
-    const collectionExists = collections.filter((collection) => collection.name === mongodbCollectionName);
-    if (!collectionExists) {
-      await database.createCollection(mongodbCollectionName);
+    if(!mongodbConnectionUrl || !mongodbDatabaseName || !mongodbCollectionName){
+      return {
+        status: false,
+        err: 'Missing required params to begin database connection'
+      };
     }
 
-    // get collection
-    rentalsCollection = await database.collection(mongodbCollectionName);
+    // if not connected, go ahead and connect
+    if (!client || !database || !rentalsCollection) {
+
+      console.log("(Re)Established connection to database");
+
+      // connect
+      client = await MongoClient.connect(mongodbConnectionUrl, {
+        useUnifiedTopology: true,
+      });
+  
+      // get database
+      database = client.db(mongodbDatabaseName);
+  
+      // create collection if it doesn't exist
+      const collections = await database.listCollections().toArray();
+      const collectionExists = collections.filter((collection) => collection.name === mongodbCollectionName);
+      if (!collectionExists) {
+        await database.createCollection(mongodbCollectionName);
+      }
+  
+      // get collection
+      rentalsCollection = await database.collection(mongodbCollectionName);
+      return {
+        status: true, 
+        action: "(Re)Established connection to database"
+      };
+    } else {
+      console.log('Already connected');
+      return {
+        status: true,
+        action: "Already connected"
+      };
+    }
+  }catch(err){
+    console.log(err);
+    return {
+      status: false,
+      err
+    }
   }
+
 };

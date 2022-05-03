@@ -13,6 +13,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
+		"ms-azuretools.vscode-cosmosdb",
+		"ms-azuretools.vscode-azureappservice",
 		"mongodb.mongodb-vscode" 
 	],
 
@@ -23,5 +25,8 @@
 	// "postCreateCommand": "yarn install",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node"
+	"remoteUser": "node",
+	"features": {
+		"azure-cli": "latest"
+	}
 }

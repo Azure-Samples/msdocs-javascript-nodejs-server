@@ -9,6 +9,14 @@ import createError from 'http-errors';
 
 // List view
 export const viewAllRentals = async (req, res) => {
+
+  const appConnectedCorrectly = req.app.get('connected');
+  console.log(`App connected: ${JSON.stringify(appConnectedCorrectly)}`);
+
+  if(appConnectedCorrectly.status===false) {
+    return res.render('error', {status: 500, message: appConnectedCorrectly.err});
+  }
+
   const rentals = await getRentals();
 
   res.render('list', {

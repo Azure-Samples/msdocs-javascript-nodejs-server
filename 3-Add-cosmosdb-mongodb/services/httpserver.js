@@ -70,6 +70,10 @@ export default async (app) => {
   // http://locahost:3000 (no trailing slash)
   app.use(checkTrailingSlash);
 
+  // Connect to Database
+  const connected = await connectToDatabase();
+  app.set('connected', connected); 
+
   // EJS Views
   app.get('/', viewAllRentals);
   app.get('/rental/edit/:id', viewEditRental);
@@ -85,9 +89,6 @@ export default async (app) => {
   // Configure error handling for routes
   app.use(on404Error);
   app.use(onRouteErrors);
-
-  // Connect to Database
-  await connectToDatabase();
 
   return app;
 };

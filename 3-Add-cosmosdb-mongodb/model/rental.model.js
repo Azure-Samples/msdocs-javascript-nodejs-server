@@ -49,10 +49,7 @@ export const addRental = async (rental) => {
 // Update one rental
 // Only handles database, image changes are handled in controller
 export const updateRental = async (rental) => {
-  console.log(rental);
-  const response = await rentalsCollection.updateOne({ _id:  new ObjectId(rental.id) }, { $set: rental });
-  console.log(response);
-  return response;
+  return await rentalsCollection.updateOne({ _id: new ObjectId(rental.id) }, { $set: rental });
 };
 // Create database connection
 export const connectToDatabase = async () => {

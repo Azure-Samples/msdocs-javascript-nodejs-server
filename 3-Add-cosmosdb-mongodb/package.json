@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "start:dev": "cross-env-shell DEBUG=express:* node -r dotenv/config ./.env.sample index.js",
+    "start:dev": "cross-env-shell DEBUG=express:* node index.js",
     "start": "node index.js",
     "import-data": "node ./scripts/import-data.js",
     "format": "prettier --write ."
   },
   "dependencies": {
     "body-parser": "^1.19.2",
-    "cross-env": "^7.0.3",    
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",

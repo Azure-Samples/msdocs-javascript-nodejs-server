@@ -19,6 +19,9 @@
 # If you need to switch tenant, use this command
 # az login -t 604c1504-c6a3-4080-81aa-b33091104187
 
+# To Run Script use the following command on the bash terminal
+# bash setup-in-sandbox.sh 
+
 #----------------------------------------------------------------------------------------
 # DON'T CHANGE ANYTHING BELOW THIS LINE
 #----------------------------------------------------------------------------------------

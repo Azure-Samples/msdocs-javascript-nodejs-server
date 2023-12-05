@@ -14,11 +14,13 @@
     let formatter = new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}); %>
 
   <div class="card m-4">
+    <% if (rental.image) { %>
     <img
       class="card-img-top"
       src="<%= rental.image %>"
       alt="<%= rental.name %>"
     />
+    <% } %>
     <div class="card-body">
       <h4 class="card-title">
         <%= rental.name %> | <%= formatter.format(rental.price) %>

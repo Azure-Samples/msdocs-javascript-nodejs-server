@@ -17,6 +17,8 @@ import {
   apiEditRental,
 } from '../controller/rentals.controller.js';
 import { connectToDatabase } from '../model/rental.model.js';
+import { connectToBlobStorage } from '../services/blobstorage.js';
+
 
 const inMemoryStorage = multer.memoryStorage();
 const uploadStrategy = multer({ storage: inMemoryStorage }).single('image');
@@ -88,6 +90,9 @@ export default async (app) => {
 
   // Connect to Database
   await connectToDatabase();
+
+  // Connect to Blob Storage
+  await connectToBlobStorage();
 
   return app;
 };

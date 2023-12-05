@@ -1,3 +1,4 @@
+import createError from 'http-errors';
 import {
   getRentals,
   getRentalById,
@@ -5,7 +6,8 @@ import {
   addRental,
   updateRental,
 } from '../model/rental.model.js';
-import createError from 'http-errors';
+import { deleteBlob, uploadBlob } from '../services/blobstorage.js';
+
 
 // List view
 export const viewAllRentals = async (req, res) => {
@@ -21,9 +23,9 @@ export const apiAllRentals = async (req, res) => {
   res.json(rentals);
 };
 // Delete view
-export const viewDeleteRental = async (req, res, next) => {
+export const viewDeleteRental = async (req, res) => {
   const { id } = req.params;
-  
+
   const rental = await getRentalById(id);
   if(!rental) return next(createError(400, 'Rental not found'));
 
@@ -32,12 +34,13 @@ export const viewDeleteRental = async (req, res, next) => {
   });
 };
 // Delete API
-export const apiDeleteRental = async (req, res, next) => {
+export const apiDeleteRental = async (req, res) => {
   const { id } = req.params;
 
   const rental = await getRentalById(id);
   if(!rental) return next(createError(400, 'Rental not found'));
 
+  await deleteBlob(rental.image);
   await deleteRentalById(id);
   res.redirect('/');
 };
@@ -50,11 +53,16 @@ export const apiAddNewRental = async (req, res) => {
   const {
     name, description, price, location, bedrooms, bathrooms, link,
   } = req.body;
+  let imageBlob = null;
+
+  if (req.file) {
+    imageBlob = await uploadBlob(req.file);
+  }
 
   await addRental({
     name,
     description,
-    image: "https://picsum.photos/200",
+    image: imageBlob && imageBlob.image ? imageBlob.image : null,
     price,
     location,
     bedrooms,
@@ -64,8 +72,9 @@ export const apiAddNewRental = async (req, res) => {
   res.redirect('/');
 };
 // Edit view
-export const viewEditRental = async (req, res, next) => {
+export const viewEditRental = async (req, res) => {
   const { id } = req.params;
+
   const rental = await getRentalById(id);
   if(!rental) return next(createError(400, 'Rental not found'));
 
@@ -74,26 +83,36 @@ export const viewEditRental = async (req, res, next) => {
   });
 };
 // Edit API
-export const apiEditRental = async (req, res, next) => {
+export const apiEditRental = async (req, res) => {
   const {
     name, description, price, location, bedrooms, bathrooms, link,
   } = req.body;
   const { id } = req.params;
+
   const rental = await getRentalById(id);
   if(!rental) return next(createError(400, 'Rental not found'));
-  
-  // don't update image - this will be fixed in Storage module of Learn path
-  const updatedRental = {
-    ...rental,
-    name,
-    description,
-    price,
-    location,
-    bedrooms,
-    bathrooms,
-    link,
-  }
 
-  await updateRental(updatedRental);
-  res.redirect('/');
+  let imageBlob = null;
+
+    if (req.file) {
+      await deleteBlob(rental.image);
+      imageBlob = await uploadBlob(req.file);
+    }
+
+    // don't update image - this will be fixed in Storage module of Learn path
+    const updatedRental = {
+      ...rental,
+      name,
+      description,
+      image: imageBlob && imageBlob.image ? imageBlob.image : rental.image,
+      price,
+      location,
+      bedrooms,
+      bathrooms,
+      link,
+    }
+
+    await updateRental(updatedRental);
+    res.redirect('/');
+
 };

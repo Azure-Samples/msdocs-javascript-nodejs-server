@@ -2,7 +2,7 @@
     {
       "name": "Georgian Court",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
-      "image": "https://picsum.photos/200",
+      "image": "",
       "price": "1000000",
       "location": "San Francisco, CA",
       "bedrooms": "3",
@@ -12,7 +12,7 @@
     {
       "name": "Brittany Court",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
-      "image": "https://picsum.photos/200",
+      "image": "",
       "price": "3000000",
       "location": "San Francisco, CA",
       "bedrooms": "3",
@@ -22,7 +22,7 @@
     {
       "name": "Baz Homes",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
-      "image": "https://picsum.photos/200",
+      "image": "",
       "price": "9000000",
       "location": "San Francisco, CA",
       "bedrooms": "3",
@@ -32,7 +32,7 @@
     {
       "name": "Bar Homes",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
-      "image": "https://picsum.photos/200",
+      "image": "",
       "price": "4000000",
       "location": "San Francisco, CA",
       "bedrooms": "3",
@@ -42,7 +42,7 @@
     {
       "name": "Foo Homes",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
-      "image": "https://picsum.photos/200",
+      "image": "",
       "price": "100000",
       "location": "San Francisco, CA",
       "bedrooms": "3",
@@ -52,7 +52,7 @@
     {
       "name": "Foo Hall",
       "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.",
-      "image": "https://picsum.photos/200",
+      "image": "",
       "price": "600000",
       "location": "San Francisco, CA",
       "bedrooms": "1",
